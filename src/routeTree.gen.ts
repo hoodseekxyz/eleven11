@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaRouteImport } from './routes/ca'
+import { Route as HowRouteImport } from './routes/how'
+import { Route as PactRouteImport } from './routes/pact'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaRoute = CaRouteImport.update({
+  id: '/ca',
+  path: '/ca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowRoute = HowRouteImport.update({
+  id: '/how',
+  path: '/how',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PactRoute = PactRouteImport.update({
+  id: '/pact',
+  path: '/pact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ca': typeof CaRoute
+  '/how': typeof HowRoute
+  '/pact': typeof PactRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ca': typeof CaRoute
+  '/how': typeof HowRoute
+  '/pact': typeof PactRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ca': typeof CaRoute
+  '/how': typeof HowRoute
+  '/pact': typeof PactRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ca' | '/how' | '/pact'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ca' | '/how' | '/pact'
+  id: '__root__' | '/' | '/ca' | '/how' | '/pact'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaRoute: typeof CaRoute
+  HowRoute: typeof HowRoute
+  PactRoute: typeof PactRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ca': {
+      id: '/ca'
+      path: '/ca'
+      fullPath: '/ca'
+      preLoaderRoute: typeof CaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how': {
+      id: '/how'
+      path: '/how'
+      fullPath: '/how'
+      preLoaderRoute: typeof HowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pact': {
+      id: '/pact'
+      path: '/pact'
+      fullPath: '/pact'
+      preLoaderRoute: typeof PactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaRoute: CaRoute,
+  HowRoute: HowRoute,
+  PactRoute: PactRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

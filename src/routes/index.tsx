@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { SiteFrame } from "@/components/site-frame";
 import { BOOK_CAP, clamp, curve, money, pct, quote, shelve, SHOCK_MAX, SHOCK_MIN, type Print } from "@/lib/paradox";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -38,8 +39,8 @@ function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-      <section className="grid gap-3 sm:grid-cols-5">
+    <SiteFrame>
+      <section className="mt-6 grid gap-3 sm:grid-cols-5">
         <img
           src="/brand/logo.jpg"
           alt="Restore mark. A short black drop and a longer yellow climb."
@@ -65,6 +66,21 @@ function Home() {
           A loss asks for more than it took. A gain gives less back.
         </p>
       </header>
+
+      <section className="mt-6 grid grid-cols-3 gap-3" aria-label="Live quote">
+        <div className="border-2 border-ink bg-loss p-4 text-paper">
+          <p className="text-sm">Walk back</p>
+          <p className="font-serif text-3xl sm:text-4xl">{pct(q.restore)}</p>
+        </div>
+        <div className="border-2 border-ink bg-paper p-4">
+          <p className="text-sm text-muted">Give back</p>
+          <p className="font-serif text-3xl text-ink sm:text-4xl">{pct(q.giveback)}</p>
+        </div>
+        <div className="border-2 border-ink bg-climb p-4">
+          <p className="text-sm text-ink">Gap</p>
+          <p className="font-serif text-3xl text-ink sm:text-4xl">{pct(q.gap)}</p>
+        </div>
+      </section>
 
       <section className="mt-8 grid gap-8 lg:grid-cols-5">
         <form className="lg:col-span-2" onSubmit={(e) => { e.preventDefault(); print(); }}>
@@ -96,14 +112,14 @@ function Home() {
                 key={n}
                 type="button"
                 onClick={() => setShock(n)}
-                className={`min-h-11 flex-1 border text-sm ${shock === n ? "border-ink bg-ink text-paper" : "border-rule bg-transparent text-ink"}`}
+                className={`fun-btn flex-1 px-2 text-sm ${shock === n ? "bg-loss text-paper" : "bg-paper text-ink"}`}
               >
                 {n}%
               </button>
             ))}
           </div>
 
-          <button type="submit" className="mt-8 min-h-11 w-full bg-ink px-4 py-3 text-sm text-paper">
+          <button type="submit" className="fun-btn mt-8 w-full bg-climb px-4 py-3 text-sm text-ink">
             Print into the book
           </button>
           <p className="mt-3 text-sm text-muted">Twelve seats. A new print pushes out the smallest gap.</p>
@@ -179,7 +195,7 @@ function Home() {
                 <p className="font-serif text-2xl text-loss">{pct(row.gap)}</p>
                 <button
                   type="button"
-                  className="min-h-11 px-3 text-sm text-muted"
+                  className="fun-btn bg-paper px-3 text-sm text-ink"
                   onClick={() => setBook(book.filter((b) => b.id !== row.id))}
                 >
                   Drop
@@ -189,19 +205,7 @@ function Home() {
           </ul>
         )}
       </section>
-
-      <footer className="mt-16 border-t border-rule pt-6 text-sm leading-relaxed text-muted">
-        <p>
-          Restore quotes a ratio. It does not hold funds, pay interest, or trade a stock.
-          The identity is the Percentage Paradox, an essay by Him Gajria, 6 May 2023. This desk is not his, and it is not Equation.
-        </p>
-        <p className="mt-3">
-          Not affiliated with Hims & Hers, Robinhood, or any token using their names.
-          A stock pair is a quote someone else chooses. This page does not deploy one.
-          eleven11.lol
-        </p>
-      </footer>
-    </main>
+    </SiteFrame>
   );
 }
 

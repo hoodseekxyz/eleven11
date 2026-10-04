@@ -6,6 +6,7 @@
   --color-muted: #6f675e;
   --color-rule: #d8d0c4;
   --color-loss: #9a3412;
+  --color-climb: #f2c14e;
   --font-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
   --font-sans: "Source Sans 3", "Source Sans Pro", sans-serif;
   --radius: 0.75rem;
@@ -15,6 +16,14 @@
   html, body { background: var(--color-paper); color: var(--color-ink); }
   body { font-family: var(--font-sans); font-variant-numeric: tabular-nums; }
   button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+}
+
+@utility fun-btn {
+  min-height: 2.75rem;
+  border: 2px solid var(--color-ink);
+  font-weight: 600;
+  transition: transform 150ms ease;
+  &:active { transform: translateY(2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
