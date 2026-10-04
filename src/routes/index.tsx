@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { SiteFrame } from "@/components/site-frame";
+import { CaBanner } from "@/components/ca-banner";
 import { BOOK_CAP, clamp, curve, money, pct, quote, shelve, SHOCK_MAX, SHOCK_MIN, type Print } from "@/lib/paradox";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -40,6 +41,7 @@ function Home() {
 
   return (
     <SiteFrame>
+      <CaBanner />
       <section className="mt-6 grid gap-3 sm:grid-cols-5">
         <img
           src="/brand/logo.jpg"

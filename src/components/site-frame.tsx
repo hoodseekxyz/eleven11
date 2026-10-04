@@ -30,7 +30,13 @@ export function SiteFrame({ children }: { children: ReactNode }) {
       </nav>
       {children}
       <footer className="mt-16 border-t border-rule pt-6 text-sm leading-relaxed text-muted">
-        <p>
+        <a
+          href="https://t.me/eleven11LOL"
+          className="fun-btn inline-flex items-center bg-climb px-5 text-sm text-ink"
+        >
+          Telegram @eleven11LOL
+        </a>
+        <p className="mt-6">
           Restore quotes a ratio. It does not hold funds, pay interest, or trade a stock.
           The identity is the Percentage Paradox, an essay by Him Gajria, 6 May 2023. This desk is not his, and it is not Equation.
         </p>
